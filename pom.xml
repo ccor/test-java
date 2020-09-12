@@ -24,6 +24,7 @@
         <module>test-httpclient</module>
         <module>test-springboot-log4j2</module>
         <module>test-zk-curator</module>
+        <module>test-common</module>
     </modules>
 
 </project>
