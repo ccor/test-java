@@ -26,7 +26,6 @@ public class XUtil {
     private static final String APPLICATION_JSON = "application/json";
     private static final String APPLICATION_XML = "application/xml";
 
-
     public static boolean isEmpty(String s) {
         return s == null || "".equals(s);
     }
