@@ -16,18 +16,18 @@ public class P673AverageOfLevelsInBinaryTree {
         q.add(root);
         bfs(q, ans);
         return ans;
-
     }
-    void bfs(LinkedList<TreeNode> q, List<Double> ans){
+
+    void bfs(LinkedList<TreeNode> q, List<Double> ans) {
         double sum = 0, n = q.size();
-        for(int i = 0; i < n; i ++){
+        for (int i = 0; i < n; i++) {
             TreeNode node = q.poll();
             sum += node.val;
-            if(node.left != null) q.offer(node.left);
-            if(node.right != null) q.offer(node.right);
+            if (node.left != null) q.offer(node.left);
+            if (node.right != null) q.offer(node.right);
         }
         ans.add(sum / n);
-        if(q.size() > 0) bfs(q, ans);
+        if (q.size() > 0) bfs(q, ans);
     }
 
     public static void main(String[] args) {

@@ -11,8 +11,8 @@ public class P94BinaryTreeInorderTraversal {
         List<Integer> list = new ArrayList<>();
         LinkedList<TreeNode> stack = new LinkedList<>();
         TreeNode node = root;
-        while(node !=null || !stack.isEmpty()){
-            while(node != null){
+        while (node != null || !stack.isEmpty()) {
+            while (node != null) {
                 stack.push(node);
                 node = node.left;
             }
@@ -26,16 +26,17 @@ public class P94BinaryTreeInorderTraversal {
 
     public List<Integer> inorderTraversal2(TreeNode root) {
         List<Integer> list = new ArrayList<>();
-        if(root == null) return list;
+        if (root == null) return list;
         dfs(root, list);
         return list;
     }
+
     void dfs(TreeNode node, List<Integer> list) {
-        if(node.left != null){
+        if (node.left != null) {
             dfs(node.left, list);
         }
         list.add(node.val);
-        if(node.right != null){
+        if (node.right != null) {
             dfs(node.right, list);
         }
     }
