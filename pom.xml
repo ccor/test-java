@@ -29,12 +29,12 @@
     </properties>
 
     <modules>
+        <module>test-common</module>
         <module>test-mybatis</module>
         <module>test-pdf</module>
         <module>test-httpclient</module>
         <module>test-springboot-log4j2</module>
         <module>test-zk-curator</module>
-        <module>test-common</module>
         <module>test-mybatis-plus</module>
         <module>test-rest-web</module>
     </modules>
@@ -42,24 +42,21 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter</artifactId>
-                <version>${spring-boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
