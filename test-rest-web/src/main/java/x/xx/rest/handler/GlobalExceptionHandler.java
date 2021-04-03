@@ -41,7 +41,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(BindException.class)
     public RestResult handleBindException(BindException e) {
-        return fail(RC_INVALID_PARAM.getCode(), getFirstFieldErrorMsg(e.getBindingResult()));
+        return fail(INVALID_PARAM.getCode(), getFirstFieldErrorMsg(e.getBindingResult()));
     }
 
     /**
@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public RestResult handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        return fail(RC_INVALID_PARAM.getCode(), getFirstFieldErrorMsg(e.getBindingResult()));
+        return fail(INVALID_PARAM.getCode(), getFirstFieldErrorMsg(e.getBindingResult()));
     }
 
     /**
@@ -66,7 +66,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ConstraintViolationException.class)
     public RestResult handleConstraintViolationException(ConstraintViolationException e) {
-        return fail(RC_INVALID_PARAM.getCode(), e.getConstraintViolations().toString());
+        return fail(INVALID_PARAM.getCode(), e.getConstraintViolations().toString());
     }
 
     /**
@@ -77,7 +77,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public RestResult handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
-        return fail(RC_REQ_METHOD_NOT_SUPPORTED);
+        return fail(REQ_METHOD_NOT_SUPPORTED);
     }
 
     /**
@@ -88,7 +88,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public RestResult handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
-        return fail(RC_INVALID_REQ_BODY);
+        return fail(INVALID_REQ_BODY);
     }
 
     /**
@@ -114,7 +114,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public RestResult exceptionHandler(Exception e) {
         log.warn("unknown error:", e);
-        return fail(RC_SERVICE_ERROR.getCode(), e.getMessage());
+        return fail(SERVICE_ERROR.getCode(), e.getMessage());
     }
 
 

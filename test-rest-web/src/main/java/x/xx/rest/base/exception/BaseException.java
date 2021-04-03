@@ -10,10 +10,10 @@ import x.xx.rest.base.CodeMsg;
 public class BaseException extends RuntimeException {
 
     @Getter
-    private int code;
+    private final int code;
 
     @Getter
-    private String msg;
+    private final String msg;
 
     public BaseException(CodeMsg codeMsg) {
         super(codeMsg.getMsg());

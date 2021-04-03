@@ -3,7 +3,7 @@ package x.xx.rest.result;
 
 import x.xx.rest.base.CodeMsg;
 
-import static x.xx.rest.enums.ResultCodeEnum.RC_SUCCESS;
+import static x.xx.rest.enums.ResultCodeEnum.SUCCESS;
 
 /**
  * 返回对象工具类
@@ -18,11 +18,11 @@ public class RestResultWrapper {
     }
 
     public static <T> RestResult<T> success() {
-        return new RestResult<>(RC_SUCCESS.getCode(), RC_SUCCESS.getMsg(), null);
+        return new RestResult<>(SUCCESS.getCode(), SUCCESS.getMsg(), null);
     }
 
     public static <T> RestResult<T> success(T data) {
-        return new RestResult<>(RC_SUCCESS.getCode(), RC_SUCCESS.getMsg(), data);
+        return new RestResult<>(SUCCESS.getCode(), SUCCESS.getMsg(), data);
     }
 
 }
