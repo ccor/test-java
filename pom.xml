@@ -37,6 +37,7 @@
         <module>test-mybatis-plus</module>
         <module>test-rest-web</module>
         <module>test-mapstruct</module>
+        <module>tp-dict</module>
     </modules>
 
     <dependencyManagement>
