@@ -8,8 +8,8 @@ import org.apache.ibatis.builder.MapperBuilderAssistant;
 import org.apache.ibatis.reflection.Reflector;
 import org.apache.ibatis.reflection.ReflectorFactory;
 import org.apache.ibatis.session.Configuration;
-import org.exmaple.TableFieldMapping;
-import org.exmaple.TableMapping;
+import org.example.mpp.TableFieldMapping;
+import org.example.mpp.TableMapping;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -27,7 +27,7 @@ public class TableInfoHelper2 {
         TableMapping tableMapping = mapperClass.getAnnotation(TableMapping.class);
         if(tableMapping != null) {
 
-            return getTableInfoFromMapperClass(builderAssistant, tableMapping, mapperClass, mapperClass);
+            return getTableInfoFromMapperClass(builderAssistant, tableMapping, mapperClass, modelClass);
             // todo 反射放入 TableInfoHelper 的缓存中？
         }
         return TableInfoHelper.initTableInfo(builderAssistant, modelClass);
@@ -129,7 +129,7 @@ public class TableInfoHelper2 {
         GlobalConfig.DbConfig dbConfig = globalConfig.getDbConfig();
         ReflectorFactory reflectorFactory = tableInfo.getConfiguration().getReflectorFactory();
         Reflector reflector = reflectorFactory.findForClass(clazz);
-        TableFieldMapping[] fieldMappings = tableMapping.fieldMappings();
+        TableFieldMapping[] fieldMappings = tableMapping.fields();
         TableId tableId = tableMapping.pks().length > 0 ? tableMapping.pks()[0] : null;
 
         Map<String, TableField> fieldMap = new HashMap<>(fieldMappings.length);
@@ -151,35 +151,37 @@ public class TableInfoHelper2 {
             if(tableField != null && !tableField.exist()) {
                 continue;
             }
-            if(tableId != null) {
-                String fieldName = fieldName(field, tableInfo);
-                String column = tableId.value();
-                if(column.equalsIgnoreCase(fieldName)){
-                    /* 主键策略（ 注解 > 全局 ） */
-                    // 设置 Sequence 其他策略无效
-                    tableInfo.setIdType(IdType.NONE == tableId.type() ? dbConfig.getIdType() : tableId.type());
-                    key(tableInfo, dbConfig.isCapitalMode() ? column.toUpperCase() : column, property, reflector);
+            if(!isReadPK) {
+                if(tableId != null) {
+                    String fieldName = fieldName(field, tableInfo);
+                    String column = tableId.value();
+                    if(column.equalsIgnoreCase(fieldName)){
+                        /* 主键策略（ 注解 > 全局 ） */
+                        // 设置 Sequence 其他策略无效
+                        tableInfo.setIdType(IdType.NONE == tableId.type() ? dbConfig.getIdType() : tableId.type());
+                        key(tableInfo, dbConfig.isCapitalMode() ? column.toUpperCase() : column, property, reflector);
+                        isReadPK = true;
+                        continue;
+                    }
+                }else if("id".equalsIgnoreCase(property)){
+                    tableInfo.setIdType(dbConfig.getIdType());
+                    key(tableInfo, dbConfig.isCapitalMode() ? property.toUpperCase() : property, property, reflector);
                     isReadPK = true;
-                }
-            }else if("id".equalsIgnoreCase(property)){
-                tableInfo.setIdType(dbConfig.getIdType());
-                key(tableInfo, dbConfig.isCapitalMode() ? property.toUpperCase() : property, property, reflector);
-                isReadPK = true;
-            }else{
-                // 是否存在 @TableLogic 注解 todo 不支持逻辑删除
-                // boolean existTableLogic = isExistTableLogic(list);
-                boolean existTableLogic = false;
-
-                /* 有 @TableField 注解的字段初始化 */
-                if (tableField != null) {
-                    fieldInfoList.add(new TableFieldInfo(dbConfig, tableInfo, field, tableField, reflector, existTableLogic));
                     continue;
                 }
-                /* 无 @TableField 注解的字段初始化 */
-                fieldInfoList.add(new TableFieldInfo(dbConfig, tableInfo, field, reflector, existTableLogic));
-
             }
 
+            // 是否存在 @TableLogic 注解 todo 不支持逻辑删除
+            // boolean existTableLogic = isExistTableLogic(list);
+            boolean existTableLogic = false;
+
+            /* 有 @TableField 注解的字段初始化 */
+            if (tableField != null) {
+                fieldInfoList.add(new TableFieldInfo(dbConfig, tableInfo, field, tableField, reflector, existTableLogic));
+                continue;
+            }
+            /* 无 @TableField 注解的字段初始化 */
+            fieldInfoList.add(new TableFieldInfo(dbConfig, tableInfo, field, reflector, existTableLogic));
         }
 
         /* 字段列表 */

@@ -1,4 +1,4 @@
-package org.exmaple;
+package org.example.mpp;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 

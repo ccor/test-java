@@ -1,4 +1,4 @@
-package org.exmaple;
+package org.example.mpp;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -14,5 +14,5 @@ import java.lang.annotation.*;
 public @interface TableMapping {
     TableName name();
     TableId[] pks() default {};
-    TableFieldMapping[] fieldMappings() default {};
+    TableFieldMapping[] fields() default {};
 }
