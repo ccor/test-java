@@ -1,0 +1,21 @@
+server.port: 8081
+management:
+    endpoint:
+        health:
+            show-details: always
+    endpoints:
+        web:
+            exposure:
+                include: '*'
+#nacos:
+##    config:
+##        server-addr: 127.0.0.1:8848
+#    discovery:
+#        server-addr: 127.0.0.1:8848
+spring:
+    application:
+        name: test-nacos-consumer
+    cloud:
+        nacos:
+            discovery:
+                server-addr: 127.0.0.1:8848

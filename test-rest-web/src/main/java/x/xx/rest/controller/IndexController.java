@@ -9,6 +9,9 @@ import x.xx.rest.enums.ResultCodeEnum;
 import x.xx.rest.model.res.CodeNameVO;
 import x.xx.rest.result.PageList;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,6 +45,15 @@ public class IndexController {
         page.setList(list);
         page.setTotal(list.size());
         return page;
+    }
+
+    @GetMapping("/x")
+    public void x(HttpServletResponse res) throws IOException {
+        StringBuilder sb = new StringBuilder(10000);
+        for(int i = 0; i < 9000; i ++) {
+            sb.append("0");
+        }
+        res.getOutputStream().write(sb.toString().getBytes(StandardCharsets.UTF_8));
     }
 
 }
