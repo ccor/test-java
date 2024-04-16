@@ -1,0 +1,24 @@
+server:
+  port: 8080
+nacos:
+  config:
+    namespace: dev
+    server-addr: 127.0.0.1:8848
+spring:
+  application:
+    name: test-gw
+  cloud:
+    discovery:
+    config:
+      file-extension: yml
+      group: DEFAULT_GROUP
+    gateway:
+      routes:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: trace

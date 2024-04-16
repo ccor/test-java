@@ -1,0 +1,14 @@
+spring:
+  jpa:
+    database: mysql
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    jdbc-url: jdbc:mysql://127.0.0.1/test?useUnicode=true&useSSL=false&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password:
+logging:
+  level:
+    org.springframework.orm: DEBUG
+    org.springframework.jpa: DEBUG
+    org.springframework.transaction: DEBUG

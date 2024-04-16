@@ -1,0 +1,66 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface AttributeAccessor
+interface BeanMetadataElement
+'abstract class AttributeAccessorSupport
+abstract class AttributeAccessorSupport implements AttributeAccessor
+class BeanMetadataAttributeAccessor extends AttributeAccessorSupport implements BeanMetadataElement
+'class BeanMetadataAttributeAccessor
+'abstract class AbstractBeanDefinition
+abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccessor implements BeanDefinition
+'interface BeanDefinition
+interface BeanDefinition extends AttributeAccessor, BeanMetadataElement
+'abstract class GenericBeanDefinition
+class GenericBeanDefinition extends AbstractBeanDefinition
+'class ChildBeanDefinition
+class ChildBeanDefinition extends AbstractBeanDefinition
+class RootBeanDefinition extends AbstractBeanDefinition
+interface AnnotatedBeanDefinition extends BeanDefinition
+class ConfigurationClassBeanDefinition extends RootBeanDefinition implements AnnotatedBeanDefinition
+class AnnotatedGenericBeanDefinition extends GenericBeanDefinition implements AnnotatedBeanDefinition
+class ScannedGenericBeanDefinition extends GenericBeanDefinition implements AnnotatedBeanDefinition
+
+'AttributeAccessor <|-- AttributeAccessorSupport
+'AttributeAccessorSupport <|-- BeanMetadataAttributeAccessor
+'BeanMetadataAttributeAccessor <|-- AbstractBeanDefinition
+'BeanMetadataElement <|-- BeanMetadataAttributeAccessor
+'BeanMetadataElement <|-- BeanDefinition
+'BeanDefinition <|-- AbstractBeanDefinition
+'AbstractBeanDefinition <|-- GenericBeanDefinition
+'AbstractBeanDefinition <|-- AnnotatedBeanDefinition
+'AbstractBeanDefinition <|-- RootBeanDefinition
+'AbstractBeanDefinition <|-- ChildBeanDefinition
+'
+'GenericBeanDefinition <|-- AnnotatedGenericBeanDefinition
+'AnnotatedBeanDefinition <|-- AnnotatedGenericBeanDefinition
+'AnnotatedBeanDefinition <|-- ScannedGenericBeanDefinition
+'AnnotatedBeanDefinition <|-- ConfigurationClassBeanDefinition
+'
+'RootBeanDefinition <|-- ConfigurationClassBeanDefinition
+
+
+'abstract class AbstractList
+'abstract AbstractCollection
+'interface List
+'interface Collection
+'
+'List <|-- AbstractList
+'Collection <|-- AbstractCollection
+'
+'Collection <|- List
+'AbstractCollection <|- AbstractList
+'AbstractList <|-- ArrayList
+'
+'class ArrayList {
+'Object[] elementData
+'size()
+'}
+'
+'enum TimeUnit {
+'DAYS
+'HOURS
+'MINUTES
+'}
+
+@enduml
