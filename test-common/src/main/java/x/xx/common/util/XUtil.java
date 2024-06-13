@@ -42,23 +42,23 @@ public class XUtil {
         return (map == null || map.isEmpty());
     }
 
-    public <T> ArrayList<T> newArrayList() {
+    public static <T> ArrayList<T> newArrayList() {
         return new ArrayList<>();
     }
 
-    public String formatTime(Date date, String patten) {
+    public static String formatTime(Date date, String patten) {
         return new SimpleDateFormat(patten).format(date);
     }
 
-    public String formatTime(Date date) {
+    public static String formatTime(Date date) {
         return new SimpleDateFormat(PATTERN_TIME).format(date);
     }
 
-    public String formatDate(Date date) {
+    public static String formatDate(Date date) {
         return new SimpleDateFormat(PATTERN_DATE).format(date);
     }
 
-    public String uuid() {
+    public static String uuid() {
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
