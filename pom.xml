@@ -31,6 +31,7 @@
         <module>test-nacos</module>
         <module>test-parent</module>
         <module>test-db</module>
+        <module>test-easyexcel</module>
     </modules>
 
 
